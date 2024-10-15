@@ -7,11 +7,12 @@ const AddNote = () => {
   const [note, setNote] = useState({
     title: "",
     description: "",
-    tag: "default",
+    tag: "",
   });
   const handleClick = (e) => {
     e.preventDefault(); /*to prevent default refresh behaviour of submit button */
     addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" });
   };
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -33,6 +34,9 @@ const AddNote = () => {
                 name="title"
                 aria-describedby="emailHelp"
                 onChange={onChange}
+                value={note.title}
+                minLength={5}
+                required
               />
             </div>
             <div className="mb-3">
@@ -45,14 +49,32 @@ const AddNote = () => {
                 id="description"
                 name="description"
                 onChange={onChange}
+                value={note.description}
+                minLength={5}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="tag" className="form-label">
+                Tag
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="tag"
+                name="tag"
+                onChange={onChange}
+                value={note.tag}
+                required
               />
             </div>
             <button
               type="submit"
               className="btn btn-primary"
               onClick={handleClick}
+              disabled={note.title.length < 5 || note.description.length < 5}
             >
-              Submit
+              Add Note
             </button>
           </form>
         </div>
