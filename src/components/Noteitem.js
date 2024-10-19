@@ -17,12 +17,15 @@ const Noteitem = (props) => {
               style={{ cursor: "pointer" }}
               onClick={() => {
                 deleteNote(note._id);
+                props.showAlert("Note Deleted Successfully", "success");
               }}
             ></i>
             <i
               className="fa-regular fa-pen-to-square mx-2"
               style={{ cursor: "pointer" }}
-              onClick={() => updateNote(note)}
+              onClick={() => {
+                updateNote(note);
+              }}
             ></i>
           </div>
         </div>

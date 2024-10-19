@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
@@ -23,9 +23,10 @@ const Login = () => {
     if (json.success) {
       /* Save the auth token and redirect */
       localStorage.setItem("token", json.jwt_token);
+      props.showAlert("Logged in Successfully", "success");
       navigate("/");
     } else {
-      alert("Invalid credentials");
+      props.showAlert("Invalid Details", "danger");
     }
   };
 
@@ -34,41 +35,44 @@ const Login = () => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            id="email"
-            value={credentials.email}
-            onChange={onChange}
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+      <div className="mt-3">
+        <h2>Login to continue to iNoteBook</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              id="email"
+              value={credentials.email}
+              onChange={onChange}
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            id="password"
-            value={credentials.password}
-            onChange={onChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              id="password"
+              value={credentials.password}
+              onChange={onChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 };
