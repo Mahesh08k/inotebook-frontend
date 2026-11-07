@@ -4,7 +4,8 @@ import React from "react";
 export const About = () => {
   return (
     <>
-      <h1>This is about Page</h1>
+      <h1>This Project by Mahesh Kulkarni , a MERN/MEAN stack dev</h1>
+      <h2>Contact Info :  kulkarni08m@gmail.com</h2>
     </>
   );
 };
